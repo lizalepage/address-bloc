@@ -61,6 +61,13 @@ RSpec.describe AddressBook do
             expect(book_size).to eq 5
         end
         
+        it "imports 3 entries correctly" do
+            book.import_from_csv("thelist.csv")
+            book_size = book.entries.size
+            
+            expect(book_size).to eq 3
+        end    
+        
         it "imports the 1st entry" do
             book.import_from_csv("entries.csv")
             entry_one = book.entries[0]
@@ -83,6 +90,14 @@ RSpec.describe AddressBook do
             entry_three = book.entries[2]
             
             check_entry(entry_three, "Joe", "555-555-3660", "joe@blocmail.com")
+        end
+        
+         it "imports the 2nd entry when there are only 3" do
+            book.import_from_csv("thelist.csv")
+       
+            entry_two = book.entries[1]
+            
+            check_entry(entry_two, "liza", "207-776-3217", "liza@gmail.com" )
         end
  
         it "imports the 4th entry" do
